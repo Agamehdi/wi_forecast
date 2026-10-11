@@ -1,0 +1,22 @@
+# Water-injection forecast - runtime dependencies.
+#
+#     pip install -r requirements.txt
+#     streamlit run app.py
+#
+# Versions are the ones this was developed and tested against. They are minimums
+# rather than hard pins, except plotly: see the note below.
+streamlit>=1.55
+pandas>=2.2
+numpy>=2.0
+matplotlib>=3.9
+openpyxl>=3.1          # pandas.read_excel engine for .xlsx
+python-pptx>=1.0       # PowerPoint export
+
+# Plotly 5.x. Nothing here needs 6, and the chart code was written against 5.24;
+# if you move to 6 check the fan chart and the trellis, which use fill="tonexty"
+# and subplot-scoped add_vline.
+plotly>=5.24,<6
+
+# Installed automatically by streamlit, listed so a slim environment still works.
+pyarrow>=14
+altair>=5

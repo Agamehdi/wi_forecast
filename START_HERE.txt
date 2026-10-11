@@ -1,0 +1,42 @@
+Water-injection forecast - quick start
+======================================
+
+You need Python 3.11 or newer. From inside this folder:
+
+    pip install -r requirements.txt
+    streamlit run app.py
+
+Your browser opens on the app. Load your input workbook from the sidebar - the
+app starts empty and reads nothing from disk until you do.
+
+What is here
+------------
+
+    app.py                  the Streamlit user interface
+    wi_forecast/            the calculation code
+        config.py           defaults: OE, decline, capacity, horizon, year
+        io.py               workbook loading and input preparation
+        engine.py           daily well profiles
+        cascade.py          manifold -> CPS -> plant constraint chain
+        montecarlo.py       probabilistic sampling and the Monte Carlo run
+        charts.py           on-screen plotly charts
+        report.py           PowerPoint export
+    docs/                   how the Spotfire logic was reproduced, and the
+                            open review items
+    scripts/validate_port.py    proves the engine matches the original script
+    tests/test_app_pages.py     renders every page headlessly
+
+The workbook needs these sheets: INJ_RATES, INJ_EVENTS, FACILITIES,
+MAPPING_SHEET, and optionally SETTINGS.
+
+Checking it still behaves
+-------------------------
+
+`scripts/validate_port.py` needs a workbook named
+`WI_profile_2026_2027_final_corrected.xlsx` in the folder, then:
+
+    python scripts/validate_port.py      # engine vs the original script
+    python tests/test_app_pages.py       # every page renders
+
+Starting values come from wi_forecast/config.py, so edit that file to change
+what the sidebar opens on.
